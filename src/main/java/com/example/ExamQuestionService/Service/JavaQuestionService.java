@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class JavaQuestionService implements QuestionService {
-    private final Set<Question> questions = new HashSet<>();
+    private static Set<Question> questions = new HashSet<>();
     @Override
     public Question add(String question, String answer) {
         Question q = new Question(question, answer);
@@ -39,7 +39,10 @@ public class JavaQuestionService implements QuestionService {
     @Override
     public Question getRandomQuestion() {
         Random ran = new Random();
-        int nxt = ran.nextInt(questions.size()+1);
+        if (questions.size() == 0) {
+            throw new RuntimeException("вопросы отсутсвуют");
+        }
+        int nxt = ran.nextInt(questions.size());
         Question[] quesArray = questions.toArray(new Question[questions.size()]);
         return quesArray[nxt];
     }

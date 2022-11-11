@@ -17,6 +17,7 @@ public class ExamServiceImpl implements ExamService {
             Question q = javaQuestionService.getRandomQuestion();
             examQuestion.add(q);
             i++;
+
         }
         if ( amount > examQuestion.size()) {
             throw new ALotOfQuestionException();
